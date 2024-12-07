@@ -19,9 +19,21 @@ const ZombieFighterComponent = ({ zombieFighter }) => {
     </div>
   )
 }
+const MyTeamComponent = ({ team }) => {
+  return (
+    <div>
+      <h3>{team?.name}</h3>
+      <img src={team?.img} alt={team?.name} />
+      <p>Price: {team?.price}</p>
+      <p>Strength: {team?.strength}</p>
+      <p>Agility: {team?.agility}</p>
+    </div>
+  )
+}
 const itemMoreThanOne = document.getElementById("itemMoreThanOne")
 const App = () => {
   const [team, setTeam] = useState([])
+  const [myTeam, setMyTeam] = useState([team])
   const [money, setMoney] = useState(100)
   const [zombieFighters, setZombieFighters] = useState([
     {
@@ -111,6 +123,21 @@ const App = () => {
       console.log("Not enough money to add this fighter.")
     }
   }
+  const handleAddMyTeamMembers = (handleAddMyTeamMember) => {
+    // Check if there's enough money to add the fighter
+
+    if (money >= handleAddMyTeamMember.price) {
+      setTeam((prevTeam) => [...prevTeam, handleAddMyTeamMember])
+      setMoney((prevMoney) => prevMoney - handleAddMyTeamMember.price)
+      console.log(
+        `${handleAddMyTeamMember.name} added to team! Remaining money: ${
+          money - handleAddMyTeamMember.price
+        }`
+      )
+    } else {
+      console.log("Not enough money to add this fighter.")
+    }
+  }
 
   return (
     <>
@@ -123,6 +150,14 @@ const App = () => {
           <li key={index}>
             <ZombieFighterComponent zombieFighter={zombieFighter} />
             <button onClick={() => handleAddFighter(zombieFighter)}>ADD</button>
+          </li>
+        ))}
+      </ul>
+      <h1>My Team Members</h1>
+      <ul>
+        {team.map((MyTeam, index) => (
+          <li key={index}>
+            <MyTeamComponent team={MyTeam} />
           </li>
         ))}
       </ul>
