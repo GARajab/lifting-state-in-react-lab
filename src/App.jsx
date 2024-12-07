@@ -128,7 +128,7 @@ const App = () => {
       console.log("Not enough money to add this fighter.")
     }
   }
-  const handleAddMyTeamMembers = (handleAddMyTeamMember) => {
+  const removeMyTeamMembers = (removeMyTeamMember) => {
     // Check if there's enough money to add the fighter
 
     if (money >= handleAddMyTeamMember.price) {
@@ -168,6 +168,9 @@ const App = () => {
         {team.map((MyTeam, index) => (
           <li key={index}>
             <MyTeamComponent team={MyTeam} />
+            <button onClick={() => handleAddFighter(zombieFighter)}>
+              REMOVE
+            </button>
           </li>
         ))}
       </ul>
