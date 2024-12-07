@@ -30,6 +30,7 @@ const MyTeamComponent = ({ team }) => {
     </div>
   )
 }
+let totalStrength = 0
 const itemMoreThanOne = document.getElementById("itemMoreThanOne")
 const App = () => {
   const [team, setTeam] = useState([])
@@ -119,6 +120,8 @@ const App = () => {
           money - zombieFighter.price
         }`
       )
+      totalStrength = totalStrength + zombieFighter.strength
+      console.log(totalStrength)
     } else {
       console.log("Not enough money to add this fighter.")
     }
@@ -143,7 +146,9 @@ const App = () => {
     <>
       {team.length === 0 ? (
         <h1 id="itemMoreThanOne">Pick some team members!</h1>
-      ) : null}
+      ) : (
+        <h1>Total Strength = {totalStrength}</h1>
+      )}
       <h1>Current Amount Of Money Is ({money} BD/-)</h1>
       <ul>
         {zombieFighters.map((zombieFighter, index) => (
